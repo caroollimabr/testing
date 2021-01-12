@@ -26,6 +26,16 @@ public class LeiloesPage {
 				driver.getPageSource().contains(valor);
 	}
 
+	public void esperaCarregarPaginaDeLeiloes() {
+		WebDriverWait wait = new WebDriverWait(driver,2);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Todos leilões')]")));
+	}
+
+	public boolean estaNaPaginaDeLeiloes() {
+		esperaCarregarPaginaDeLeiloes();
+		return this.driver.getCurrentUrl().endsWith("/leiloes");
+	}
+
 	public NovoLeilaoPage visitaPaginaParaCriarUmNovoLeilao() {
 		
 		WebDriverWait wait = new WebDriverWait(driver,5);
