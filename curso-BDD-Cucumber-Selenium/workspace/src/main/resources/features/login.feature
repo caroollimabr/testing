@@ -1,6 +1,7 @@
 # language: pt
-  ## End2End
+  ## BDD - End2End
 
+@login
 Funcionalidade: Apenas usuarios cadastrados podem se logar
 
   Cenario: Um usuario valido consegue se logar

@@ -1,5 +1,5 @@
 # language: pt
-  ## BDD
+  ## BDD - de unidade
 Funcionalidade: Propondo lances
   Cenario: Propondo um unico lance valido
     Dado um lance valido
