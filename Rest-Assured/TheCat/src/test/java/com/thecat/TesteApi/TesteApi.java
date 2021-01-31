@@ -1,43 +1,39 @@
 package com.thecat.TesteApi;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static io.restassured.RestAssured.*;
 import io.restassured.response.Response;
 import static org.hamcrest.Matchers.*;
 
 
-public class TesteApi {
+public class TesteApi extends MassaDeDados {
 
-    String vote_id;
-    String favourite_id;
+    @BeforeClass
+    public static void urlBase(){
+        baseURI = "https://api.thecatapi.com/v1/";
+    }
 
     @Test
     public void cadastro(){
-        String url = "https://api.thecatapi.com/v1/user/passwordlesssignup";
-        // barras antes das aspas para identificar corretamente as diferentes Strings
-        String corpo = "{\"email\": \"carool.limabr@gmail.com\", \"appDescription\": \"tests with rest assured\"}";
 
         Response response = given()
-                .contentType("application/json").body(corpo)
-                .when().post(url);
+                .contentType("application/json").body(corpoCadastro)
+                .when().post(urlCadastro);
 
-        response.then().body("message", containsString("SUCCESS")).statusCode(200);
-
-        System.out.println("Retorno => " + response.body().asString());
+        validacao(response);
     }
 
     @Test
     public void votacao(){
-        String url = "https://api.thecatapi.com/v1/votes/";
 
         Response response = given()
                 .contentType("application/json")
-                .body("{\"image_id\": \"ZdhQh9wc9\", \"value\": \"true\", \"sub_id\": \"demo-1fa94e\"}")
-                .when().post(url);
+                .body(corpoVotacao)
+                .when().post("votes/");
 
-        response.then().body("message", containsString("SUCCESS")).statusCode(200);
+        validacao(response);
 
-        System.out.println("Retorno VOTACAO => " + response.body().asString());
         String id = response.jsonPath().getString("id");
         vote_id = id; // variável global irá receber o valor do id para deletarmos
         System.out.println("ID => " + id);
@@ -58,13 +54,12 @@ public class TesteApi {
 
 
     private void deletaVoto() {
-        String url = "https://api.thecatapi.com/v1/votes/{vote_id}";
 
         Response response = given()
                 .contentType("application/json")
                 .header("x-api-key","cf399608-a7fc-4977-976b-85e9ac923ee0")
                 .pathParam("vote_id", vote_id)
-                .when().delete(url);
+                .when().delete("votes/{vote_id}");
 
         System.out.println("Retorno DELETA VOTO => " + response.body().asString());
 
@@ -79,30 +74,31 @@ public class TesteApi {
         Response response = given()
                 .contentType("application/json")
                 .header("x-api-key","cf399608-a7fc-4977-976b-85e9ac923ee0")
-                .body("{\"image_id\": \"2uo\",\"sub_id\": \"your-user-1234\"}")
-                .when().post("https://api.thecatapi.com/v1/favourites");
+                .body(corpoFavorita)
+                .when().post("favourites");
 
         String id = response.jsonPath().getString("id");
         favourite_id = id;
 
-        System.out.println("Retorno FAVORITA => " + response.body().asString());
-
-        response.then().body("message", containsString("SUCCESS")).statusCode(200);
+        validacao(response);
 
     }
 
     private void deletaFavorito() {
-        String url = "https://api.thecatapi.com/v1/favourites/{favourite_id}";
 
         Response response = given()
                 .contentType("application/json")
                 .header("x-api-key","cf399608-a7fc-4977-976b-85e9ac923ee0")
                 .pathParam("favourite_id", favourite_id)
-                .when().delete(url);
+                .when().delete(urlDeletaFavorito);
 
-        System.out.println("Retorno DESFAVORITA => " + response.body().asString());
+        validacao(response);
+    }
 
+    public void validacao(Response response){
         response.then().body("message", containsString("SUCCESS")).statusCode(200);
+        System.out.println("Retorno => " + response.body().asString());
+        System.out.println("------------------------------------------------------------------------------------");
 
     }
 
