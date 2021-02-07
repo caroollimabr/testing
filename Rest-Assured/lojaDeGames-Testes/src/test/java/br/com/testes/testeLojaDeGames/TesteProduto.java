@@ -87,6 +87,23 @@ public class TesteProduto extends MassaDeDadosProdutos{
         System.out.println("Retorno => " + response.body().asString());
     }
 
+    @Test
+    public void putProduto(){
+
+    }
+
+    @Test
+    public void deleteProduto(){
+        Response response = given()
+                .contentType("application/json")
+                .pathParam("id", 5)
+                .when().delete(baseURI.concat("{id}"));
+
+        response.then()
+                .statusCode(200);
+    }
+
+
 
 
 
