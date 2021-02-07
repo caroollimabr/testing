@@ -23,7 +23,7 @@ public class Categoria {
 	private String categoria;
 	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("categoria")
+	@JsonIgnoreProperties("categoria_id")
 	private List<Produto> produtos;
 	
 	

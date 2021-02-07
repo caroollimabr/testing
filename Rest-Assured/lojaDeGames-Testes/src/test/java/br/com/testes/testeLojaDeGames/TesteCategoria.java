@@ -15,14 +15,16 @@ public class TesteCategoria extends MassaDeDadosCategoria{
         baseURI = "http://localhost:8080/categoria/";
     }
 
-    //falta confirmar objeto
+    //falta completar objetos
     @Test
-    public void getAllCategoria(){
+    public void getAllCategorias(){
         Response response = given()
                         .when().get(baseURI)
                         .then()
                             .body("id[0]",is(1))
                             .body("categoria[0]", containsString("tabuleiro"))
+                            .body("listaProdutos[0].id[0]",is(6))
+                            .body("listaProdutos[0].nomeProduto[0]",containsString("Zelda"))
                             .body("id[1]",is(2))
                             .body("categoria[1]", containsString("RPG"))
                             .body("id[2]",is(4))
@@ -38,7 +40,7 @@ public class TesteCategoria extends MassaDeDadosCategoria{
 
         Response response = given()
                 .contentType("application/json")
-                .when().get(baseURI.concat(urlCategoriaId))
+                .when().get(baseURI.concat("1"))
                 .then()
                     .body("id",is(1))
                     .body("categoria", containsString("tabuleiro"))
@@ -59,9 +61,9 @@ public class TesteCategoria extends MassaDeDadosCategoria{
     }
 
     @Test
-    public void post(){
+    public void postCategoria(){
         Response response = given().contentType("application/json").body(corpoCategoria)
-                .when().post(baseURI);
+                .when().post();
 
         response.then().body(containsString("acao"))
                 .statusCode(201);
@@ -69,12 +71,18 @@ public class TesteCategoria extends MassaDeDadosCategoria{
     }
 
     @Test
-    public void put(){
+    public void putCategoria(){
+        Response response = given().contentType("application/json").body(corpoCategoriaAlteracao)
+                .when().put();
+
+        response.then().body(containsString("esportes"))
+                .statusCode(200);
+        System.out.println("Retorno => " + response.body().asString());
 
     }
 
     @Test
-    public void delete(){
+    public void deleteCategoria(){
         Response response = given()
                 .contentType("application/json")
                 .pathParam("id", 3)
