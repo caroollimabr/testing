@@ -19,19 +19,17 @@ public class TesteCategoria extends MassaDeDadosCategoria{
     @Test
     public void getAllCategorias(){
         Response response = given()
-                        .when().get(baseURI)
+                        .when().get()
                         .then()
                             .body("id[0]",is(1))
                             .body("categoria[0]", containsString("tabuleiro"))
                             .body("listaProdutos[0].id[0]",is(6))
-                            .body("listaProdutos[0].nomeProduto[0]",containsString("Zelda"))
+                            .body("listaProdutos[0].nomeProduto[0]",containsString("Detetive"))
                             .body("id[1]",is(2))
                             .body("categoria[1]", containsString("RPG"))
                             .body("id[2]",is(4))
                             .body("categoria[2]", containsString("card game"))
                             .statusCode(200).contentType(ContentType.JSON).extract().response();
-
-        System.out.println("Retorno => " + response.body().asString());
 
     }
 
@@ -40,7 +38,8 @@ public class TesteCategoria extends MassaDeDadosCategoria{
 
         Response response = given()
                 .contentType("application/json")
-                .when().get(baseURI.concat("1"))
+                .pathParam("id", 1)
+                .when().get("{id}")
                 .then()
                     .body("id",is(1))
                     .body("categoria", containsString("tabuleiro"))
@@ -53,10 +52,10 @@ public class TesteCategoria extends MassaDeDadosCategoria{
 
         Response response = given()
                 .contentType("application/json")
-                .when().get(baseURI.concat(urlNomeCategoria))
+                .when().get(baseURI.concat(urlNomeCategoria)) //outra opção - não precisa de @BeforeClass
                 .then()
                     .body("id[0]",is(2))
-                    .body("categoria[0]", containsString("RPG"))
+                    .body("categoria[0]", equalTo("RPG"))
                     .statusCode(200).contentType(ContentType.JSON).extract().response();
     }
 
@@ -64,20 +63,17 @@ public class TesteCategoria extends MassaDeDadosCategoria{
     public void postCategoria(){
         Response response = given().contentType("application/json").body(corpoCategoria)
                 .when().post();
-
-        response.then().body(containsString("acao"))
+        response.then().body(equalTo("acao"))
                 .statusCode(201);
-        System.out.println("Retorno => " + response.body().asString());
+        System.out.println("Retorno => " + response.body().asString()); //verificar a resposta real para fazer os testes
     }
 
     @Test
     public void putCategoria(){
         Response response = given().contentType("application/json").body(corpoCategoriaAlteracao)
                 .when().put();
-
-        response.then().body(containsString("esportes"))
+        response.then().body(equalTo("esportes"))
                 .statusCode(200);
-        System.out.println("Retorno => " + response.body().asString());
 
     }
 
@@ -86,7 +82,7 @@ public class TesteCategoria extends MassaDeDadosCategoria{
         Response response = given()
                 .contentType("application/json")
                 .pathParam("id", 3)
-                .when().delete(baseURI.concat(urlCategoriaDelete));
+                .when().delete(urlCategoriaDelete);
 
         response.then()
                 .statusCode(200);

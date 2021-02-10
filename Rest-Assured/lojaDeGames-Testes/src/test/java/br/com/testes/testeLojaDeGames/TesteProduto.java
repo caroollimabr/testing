@@ -28,16 +28,14 @@ public class TesteProduto extends MassaDeDadosProdutos{
                 //.body("preco[0]",equalTo(new Double(450.0)))
                 .body("qtdEstoque[0]",is(5))
                 .body("id[1]",is(6))
-                .body("nomeProduto[1]", containsString("Detetive"))
+                .body("nomeProduto[1]", equalTo("Detetive"))
                 //.body("preco[1]",is(100.99))
                 .body("qtdEstoque[1]",is(8))
                 .body("id[2]",is(8))
-                .body("nomeProduto[2]", containsString("HeartStone"))
+                .body("nomeProduto[2]", equalTo("HeartStone"))
                 //.body("preco[2]",is(65.49))
                 .body("qtdEstoque[2]",is(2))
                 .statusCode(200).contentType(ContentType.JSON).extract().response();
-
-        System.out.println("Retorno => " + response.body().asString());
 
     }
 
@@ -47,7 +45,7 @@ public class TesteProduto extends MassaDeDadosProdutos{
         Response response = given()
                 .contentType("application/json")
                 .pathParam("id", 5)
-                .when().get(baseURI.concat("{id}"))
+                .when().get("{id}")
                 .then()
                 .body("id",is(5))
                 .body("nomeProduto", containsString("Zelda"))
@@ -59,11 +57,10 @@ public class TesteProduto extends MassaDeDadosProdutos{
 
     @Test
     public void getNomeProduto(){
-
         Response response = given()
                 .contentType("application/json")
                 .pathParam("nomeProduto", "Zelda")
-                .when().get(baseURI.concat(urlNomeProduto))
+                .when().get(urlNomeProduto)
                 .then()
                 .body("id[0]",is(5))
                 .body("nomeProduto[0]", containsString("Zelda"))
@@ -77,10 +74,10 @@ public class TesteProduto extends MassaDeDadosProdutos{
     @Test
     public void postProduto(){
         Response response = given().contentType("application/json").body(corpoProduto)
-                .when().post(baseURI);
+                .when().post();
 
         response.then()
-                .body("nomeProduto", containsString("World of Warcraft"))
+                .body("nomeProduto", equalTo("World of Warcraft")) // mais assertivo que containsString
                 //.body("preco", is(563.9))
                 .body("qtdEstoque", is(3))
                 .statusCode(201);
@@ -89,25 +86,28 @@ public class TesteProduto extends MassaDeDadosProdutos{
 
     @Test
     public void putProduto(){
+        Response response = given().contentType("application/json").body(corpoProdutoAlteracao)
+                .when().put();
 
+        response.then()
+                .body("id", is(17))
+                .body("nomeProduto",containsString("World of Warcraft II"))
+                //.body("preco", equalTo("663.9"))
+                .body("preco", notNullValue()) // não é nulo
+                .body("qtdEstoque", is(4))
+                .body("categoria", nullValue()) // é nulo
+                .statusCode(200);
     }
 
     @Test
     public void deleteProduto(){
         Response response = given()
                 .contentType("application/json")
-                .pathParam("id", 5)
-                .when().delete(baseURI.concat("{id}"));
+                .pathParam("id", 20)
+                .when().delete(baseURI.concat("{id}"));  // outra opção - não precisa de @BeforeClass
 
         response.then()
                 .statusCode(200);
     }
-
-
-
-
-
-
-
 
 }
