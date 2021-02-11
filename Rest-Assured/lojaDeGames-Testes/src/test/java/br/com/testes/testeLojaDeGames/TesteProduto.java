@@ -49,7 +49,7 @@ public class TesteProduto extends MassaDeDadosProdutos{
                 .then()
                 .body("id",is(5))
                 .body("nomeProduto", containsString("Zelda"))
-                //.body("preco",is(450.0))
+                //.body("preco",comparesEqualTo(450.0))
                 .body("qtdEstoque",is(5))
                 .statusCode(200).contentType(ContentType.JSON).extract().response();
 
