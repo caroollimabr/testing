@@ -30,6 +30,13 @@ public class LoginPage {
         browser.findElement(By.id("login-form")).submit(); //submete formulário, outra opcao é encontrar o botão + .click()
     }
 
+
+    public LeiloesPage efetuaLogin(String username, String password) {
+        this.preencheFormularioDeLogin(username, password);
+        this.submeteFormularioDeLogin();
+        return new LeiloesPage(browser);
+    }
+
     public boolean isPaginaDeLogin() {
         return browser.getCurrentUrl().contains(URL_LOGIN); //é possível colocar .equals
     }
