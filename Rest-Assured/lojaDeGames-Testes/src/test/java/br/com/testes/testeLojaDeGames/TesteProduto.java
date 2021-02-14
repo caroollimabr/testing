@@ -25,15 +25,15 @@ public class TesteProduto extends MassaDeDadosProdutos{
                 .then()
                 .body("id[0]",is(5))
                 .body("nomeProduto[0]", containsString("Zelda"))
-                //.body("preco[0]",equalTo(new Double(450.0)))
+                .body("preco[0]", equalTo(450f)) // 450f = 450.0
                 .body("qtdEstoque[0]",is(5))
                 .body("id[1]",is(6))
                 .body("nomeProduto[1]", equalTo("Detetive"))
-                //.body("preco[1]",is(100.99))
+                .body("preco[1]",equalTo(100.99f))
                 .body("qtdEstoque[1]",is(8))
                 .body("id[2]",is(8))
                 .body("nomeProduto[2]", equalTo("HeartStone"))
-                //.body("preco[2]",is(65.49))
+                .body("preco[2]",equalTo(65.49f))
                 .body("qtdEstoque[2]",is(2))
                 .statusCode(200).contentType(ContentType.JSON).extract().response();
 
@@ -49,7 +49,7 @@ public class TesteProduto extends MassaDeDadosProdutos{
                 .then()
                 .body("id",is(5))
                 .body("nomeProduto", containsString("Zelda"))
-                //.body("preco",comparesEqualTo(450.0))
+                .body("preco", equalTo(450f)) // 450f = 450.0
                 .body("qtdEstoque",is(5))
                 .statusCode(200).contentType(ContentType.JSON).extract().response();
 
@@ -64,7 +64,7 @@ public class TesteProduto extends MassaDeDadosProdutos{
                 .then()
                 .body("id[0]",is(5))
                 .body("nomeProduto[0]", containsString("Zelda"))
-                //.body("preco[0]",is(450.0))
+                .body("preco[0]",equalTo(450.0f))
                 .body("qtdEstoque[0]",is(5))
                 .body("categoria[0].id", is(2))
                 .body("categoria[0].categoria", containsString("RPG"))
@@ -78,7 +78,7 @@ public class TesteProduto extends MassaDeDadosProdutos{
 
         response.then()
                 .body("nomeProduto", equalTo("World of Warcraft")) // mais assertivo que containsString
-                //.body("preco", is(563.9))
+                .body("preco", equalTo(563.9f))
                 .body("qtdEstoque", is(3))
                 .statusCode(201);
         System.out.println("Retorno => " + response.body().asString());
@@ -92,7 +92,7 @@ public class TesteProduto extends MassaDeDadosProdutos{
         response.then()
                 .body("id", is(17))
                 .body("nomeProduto",containsString("World of Warcraft II"))
-                //.body("preco", equalTo("663.9"))
+                .body("preco", equalTo("663.9f"))
                 .body("preco", notNullValue()) // não é nulo
                 .body("qtdEstoque", is(4))
                 .body("categoria", nullValue()) // é nulo
@@ -103,7 +103,7 @@ public class TesteProduto extends MassaDeDadosProdutos{
     public void deleteProduto(){
         Response response = given()
                 .contentType("application/json")
-                .pathParam("id", 20)
+                .pathParam("id", 21)
                 .when().delete(baseURI.concat("{id}"));  // outra opção - não precisa de @BeforeClass
 
         response.then()
