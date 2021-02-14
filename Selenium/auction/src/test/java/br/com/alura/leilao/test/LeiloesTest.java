@@ -1,8 +1,8 @@
 package br.com.alura.leilao.test;
 
-import br.com.alura.leilao.page.CadastroLeilaoPage;
-import br.com.alura.leilao.page.LeiloesPage;
-import br.com.alura.leilao.page.LoginPage;
+import br.com.alura.leilao.test.page.CadastroLeilaoPage;
+import br.com.alura.leilao.test.page.LeiloesPage;
+import br.com.alura.leilao.test.page.LoginPage;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,8 +17,8 @@ public class LeiloesTest extends LeiloesPage {
     private LeiloesPage paginaLeiloes;
     private CadastroLeilaoPage paginaCadastroLeilao;
 
-    public LeiloesTest(WebDriver browser) {
-        super(browser);
+    public LeiloesTest() {
+        super(null);
     }
 
     @BeforeEach
@@ -43,7 +43,15 @@ public class LeiloesTest extends LeiloesPage {
         this.paginaLeiloes = paginaCadastroLeilao.cadastrarLeilao(nomeLeilao, valorInicial, hoje);
 
         Assert.assertTrue(paginaLeiloes.isLeilaoCadastrado(nomeLeilao, valorInicial, hoje));
+    }
 
 
+    @Test
+    public void verificaCamposCadastroLeilao(){
+        this.paginaLeiloes = paginaCadastroLeilao.cadastrarLeilao("", "", "");
+
+        Assert.assertFalse(this.paginaCadastroLeilao.isPaginaAtual());
+        Assert.assertTrue(this.paginaLeiloes.isPaginaAtual());
+        Assert.assertTrue(this.paginaCadastroLeilao.contemAlertasValidacaoCampos());
     }
 }

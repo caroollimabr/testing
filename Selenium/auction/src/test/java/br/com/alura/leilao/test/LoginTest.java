@@ -1,6 +1,6 @@
 package br.com.alura.leilao.test;
 
-import br.com.alura.leilao.page.LoginPage;
+import br.com.alura.leilao.test.page.LoginPage;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
