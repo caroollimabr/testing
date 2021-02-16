@@ -8,3 +8,4 @@ Rest-Assured/lojaDeGames/.classpath.txt
 Rest-Assured/lojaDeGames/.mvn
 Rest-Assured/lojaDeGames-Testes/.idea
 Rest-Assured/lojaDeGames-Testes/target
+*.DS_Store
