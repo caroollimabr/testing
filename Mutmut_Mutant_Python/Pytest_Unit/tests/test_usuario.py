@@ -55,5 +55,3 @@ def test_nao_deve_permitir_dois_lances_seguidos_mesmo_usuario(fulano, leilao):
     with pytest.raises(LanceInvalido):
         fulano.propoe_lance(leilao, 1000.0)
         fulano.propoe_lance(leilao, 1200.0)
-
-    assert LanceInvalido is 'O mesmo usuário não pode dar dois lances seguidos.'
