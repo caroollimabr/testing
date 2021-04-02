@@ -63,7 +63,7 @@ public class TesteCategoria extends MassaDeDadosCategoria{
     public void postCategoria(){
         Response response = given().contentType("application/json").body(corpoCategoria)
                 .when().post();
-        response.then().body(equalTo("acao"))
+        response.then().body("categoria", equalTo("acao"))
                 .statusCode(201);
         System.out.println("Retorno => " + response.body().asString()); //verificar a resposta real para fazer os testes
     }
@@ -72,7 +72,7 @@ public class TesteCategoria extends MassaDeDadosCategoria{
     public void putCategoria(){
         Response response = given().contentType("application/json").body(corpoCategoriaAlteracao)
                 .when().put();
-        response.then().body(equalTo("esportes"))
+        response.then().body("categoria", equalTo("esportes"))
                 .statusCode(200);
 
     }

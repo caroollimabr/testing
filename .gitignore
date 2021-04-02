@@ -9,3 +9,13 @@ Rest-Assured/lojaDeGames/.mvn
 Rest-Assured/lojaDeGames-Testes/.idea
 Rest-Assured/lojaDeGames-Testes/target
 *.DS_Store
+JUnit/SistemaBancario/.settings
+JUnit/SistemaBancario/bin
+JUnit/SistemaBancario/.classpath
+JUnit/SistemaBancario/.project
+JUnit/hamcrest-core-1.3.jar
+JUnit/junit-4.12.jar
+Rest_Assured/lojaDeGames/.mvn
+Rest_Assured/lojaDeGames/.classpath.txt
+Rest_Assured/lojaDeGames-Testes/target/test-classes/br/com/testes/testeLojaDeGames
+Rest_Assured/TheCat/.idea

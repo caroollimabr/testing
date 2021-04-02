@@ -92,7 +92,7 @@ public class TesteProduto extends MassaDeDadosProdutos{
         response.then()
                 .body("id", is(17))
                 .body("nomeProduto",containsString("World of Warcraft II"))
-                .body("preco", equalTo("663.9f"))
+                .body("preco", equalTo(663.9f))
                 .body("preco", notNullValue()) // não é nulo
                 .body("qtdEstoque", is(4))
                 .body("categoria", nullValue()) // é nulo
