@@ -19,3 +19,8 @@ Rest_Assured/lojaDeGames/.mvn
 Rest_Assured/lojaDeGames/.classpath.txt
 Rest_Assured/lojaDeGames-Testes/target/test-classes/br/com/testes/testeLojaDeGames
 Rest_Assured/TheCat/.idea
+Rest_Assured/.idea
+*.iml
+Rest_Assured/RestAssuredIntermediario/target
+Rest_Assured/RestAssuredIntermediario/.idea
+Rest_Assured/lojaDeGames-Testes/.idea
