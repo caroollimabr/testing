@@ -2,8 +2,6 @@ package br.com.carol.restassured;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,10 +13,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.nullValue;
 
-public class tiposRequisicoes {
-
-    public static RequestSpecification reqSpec;
-    public static ResponseSpecification resSpec;
+public class tiposRequisicoesTest {
 
     @BeforeClass
     public static void setup(){

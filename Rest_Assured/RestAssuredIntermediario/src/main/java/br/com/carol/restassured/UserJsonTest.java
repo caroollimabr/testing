@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -17,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 public class UserJsonTest {
 
     @Test
-    public void verificaPrimeiroUsuario(){
+    public void retornaPrimeiroUsuario(){
         given()
                 .when()
                     .get("http://restapi.wcaquino.me/users/1")
@@ -29,7 +28,7 @@ public class UserJsonTest {
     }
 
     @Test
-    public void verificaPrimeiroUsuario2(){
+    public void retornaPrimeiroUsuario2(){
         Response response = RestAssured.request(Method.GET, "http://restapi.wcaquino.me/users/1");
 
         // com path
@@ -46,7 +45,7 @@ public class UserJsonTest {
     }
 
     @Test
-    public void verificaSegundoUsuarioObj(){
+    public void retornaSegundoUsuarioObj(){
         given()
                 .when()
                     .get("http://restapi.wcaquino.me/users/2")
@@ -58,7 +57,7 @@ public class UserJsonTest {
     }
 
     @Test
-    public void verificaTerceiroUsuarioArray(){
+    public void retornaTerceiroUsuarioArray(){
         given()
                 .when()
                     .get("http://restapi.wcaquino.me/users/3")
@@ -83,7 +82,7 @@ public class UserJsonTest {
     }
 
     @Test
-    public void verificaListaUsuarios() {
+    public void retornaListaUsuarios() {
         given()
                 .when()
                 .get("http://restapi.wcaquino.me/users")
@@ -111,7 +110,7 @@ public class UserJsonTest {
     }
 
     @Test
-    public void verificaListaUsuariosJsonPathComJava() {
+    public void retornaListaUsuariosJsonPathComJava() {
         ArrayList<String> names =
                 given().
                         when()
