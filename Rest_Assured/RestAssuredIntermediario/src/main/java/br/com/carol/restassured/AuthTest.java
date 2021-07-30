@@ -1,9 +1,7 @@
 package br.com.carol.restassured;
 
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.xml.XmlPath;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.HashMap;
