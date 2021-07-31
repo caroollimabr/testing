@@ -12,26 +12,24 @@ import java.util.Date;
 
 public class AprenderCucumberSteps {
 
+    private int contador = 0;
+    Date entrega = new Date();
+    Date data = new Date();
+
     @Dado("que criei o arquivo corretamente")
     public void queCrieiOArquivoCorretamente() throws Throwable{
     }
 
-    @Quando("eu executá-lo")
-    public void euExecutáLo() throws Throwable{
-    }
-
-    @Então("a especificação deve finalizar com sucesso")
-    public void aEspecificaçãoDeveFinalizarComSucesso() throws Throwable{
-    }
-    private int contador = 0;
     @Dado("que o valor do contador é {int}")
     public void queOValorDoContadorÉ(int arg1) throws Throwable{
         contador = arg1;
     }
+
     @Quando("eu incrementar em {int}")
     public void euIncrementarEm(int arg1) throws Throwable{
         contador = contador + arg1;
     }
+
     @Então("o valor do contador será {int}")
     public void oValorDoContadorSerá(int arg1) throws Throwable{
         System.out.println(arg1);
@@ -39,8 +37,7 @@ public class AprenderCucumberSteps {
         //Assert.assertTrue(arg1 == contador);
         Assert.assertEquals(arg1, contador);
     }
-    Date entrega = new Date();
-    Date data = new Date();
+
     @Dado("que a entrega é {int}\\/{int}\\/{int}")
     public void queAEntregaE(int dia, int mes, int ano) throws Throwable{
         Calendar cal = Calendar.getInstance();
@@ -49,6 +46,7 @@ public class AprenderCucumberSteps {
         cal.set(Calendar.YEAR, ano);
         entrega = cal.getTime();
     }
+
     @Quando("a entrega atrasar {int} {string}")
     public void aEntregaAtrasar(int qte, String tempo) throws Throwable{
         Calendar cal = Calendar.getInstance();
@@ -61,6 +59,7 @@ public class AprenderCucumberSteps {
         }
         entrega = cal.getTime();
     }
+
     @Então("a entrega será efetuada em {int}\\/{int}\\/{int}")
     public void aEntregaSeraEfetuadaEm(int dia, int mes, int ano) throws Throwable{
         Calendar cal = Calendar.getInstance();
@@ -78,22 +77,37 @@ public class AprenderCucumberSteps {
     public void queOTicketÉ(String string, String string2) throws Throwable{
 
     }
+
     @Dado("que o valor da passagem é R$ {string}")
     public void queOValorDaPassagemÉR$(String string) throws Throwable{
 
     }
+
     @Dado("que o nome do passageiro é {string}")
     public void queONomeDoPassageiroÉ(String string) throws Throwable{
 
     }
+
     @Dado("que o telefone do passageiro é {string}")
     public void queOTelefoneDoPassageiroÉ(String string) throws Throwable{
 
     }
+
+    @Quando("eu executá-lo")
+    public void euExecutáLo() throws Throwable{
+
+    }
+
     @Quando("criar os steps")
     public void criarOsSteps() throws Throwable{
 
     }
+
+    @Então("a especificação deve finalizar com sucesso")
+    public void aEspecificaçãoDeveFinalizarComSucesso() throws Throwable{
+
+    }
+
     @Então("o teste vai funcionar")
     public void oTesteVaiFuncionar() throws Throwable{
 
