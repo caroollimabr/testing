@@ -2,8 +2,10 @@ package br.com.carol.cucumber.steps;
 
 import br.com.carol.entidades.Filme;
 import br.com.carol.entidades.NotaAluguel;
+import br.com.carol.entidades.TipoAluguel;
 import br.com.carol.servicos.AluguelService;
 import br.com.carol.utils.DateUtils;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
@@ -12,13 +14,27 @@ import org.junit.Assert;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public class AlugarFilmeSteps {
     private Filme filme;
     private AluguelService aluguel = new AluguelService();
     private NotaAluguel nota;
     private String erro;
-    private String tipoAluguel;
+    private TipoAluguel tipoAluguel = TipoAluguel.COMUM;
+
+    @Dado("um filme")
+    public void umFilme(DataTable tabela) throws Throwable {
+        Map<String, String> map = tabela.asMap(String.class, String.class);
+        filme = new Filme();
+        filme.setEstoque(Integer.parseInt(map.get("estoque"))); // precisa de parse pois os valores são int
+        filme.setAluguel(Integer.parseInt(map.get("preco")));
+
+        String tipo = map.get("tipo");
+        tipoAluguel = tipo.equals("semanal")? TipoAluguel.SEMANAL:
+                tipo.equals("estendido")? TipoAluguel.ESTENDIDO:
+                        TipoAluguel.COMUM;
+    }
 
     @Dado("um filme com estoque de {int} unidades")
     public void umFilmeComEstoqueDeUnidades(int estoque) throws Throwable{
@@ -64,7 +80,9 @@ public class AlugarFilmeSteps {
 
     @Dado("o tipo de aluguel seja {string}")
     public void oTipoDeAluguelSeja(String tipo) throws Throwable{
-        tipoAluguel = tipo;
+        tipoAluguel = tipo.equals("semanal")? TipoAluguel.SEMANAL:
+                tipo.equals("estendido")? TipoAluguel.ESTENDIDO:
+                TipoAluguel.COMUM;
     }
 
     @Então("a pontuação recebida será de {int} pontos")
