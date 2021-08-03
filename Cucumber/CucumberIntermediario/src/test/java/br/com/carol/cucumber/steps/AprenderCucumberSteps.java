@@ -38,6 +38,7 @@ public class AprenderCucumberSteps {
         Assert.assertEquals(arg1, contador);
     }
 
+// Uma opção
     @Dado("que a entrega é {int}\\/{int}\\/{int}")
     public void queAEntregaE(int dia, int mes, int ano) throws Throwable{
         Calendar cal = Calendar.getInstance();
@@ -46,6 +47,11 @@ public class AprenderCucumberSteps {
         cal.set(Calendar.YEAR, ano);
         entrega = cal.getTime();
     }
+// Outra opção com o Cucumber Registry
+//    @Dado("que a entrega é {data}")
+//    public void queAEntregaE(Date data) throws Throwable{
+//        entrega = data;
+//    }
 
     @Quando("a entrega atrasar {int} {string}")
     public void aEntregaAtrasar(int qte, String tempo) throws Throwable{

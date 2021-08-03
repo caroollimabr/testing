@@ -1,14 +1,12 @@
 package br.com.carol.test.seubarriga.steps;
 
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
