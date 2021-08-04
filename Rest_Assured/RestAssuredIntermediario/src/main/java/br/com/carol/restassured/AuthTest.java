@@ -92,7 +92,7 @@ public class AuthTest {
     @Test
     public void acessaComTokenJWT() {
         Map<String, String> login = new HashMap<String, String>();
-        login.put("email", "wagner@aquino");
+        login.put("email", "carol@carol");
         login.put("senha", "123456");
 
         // loga na api e recebe token
@@ -110,7 +110,7 @@ public class AuthTest {
         // obtém as contas
         given()
                 .log().all()
-                .header("Authorization", "JWT" + token)
+                .header("Authorization", "JWT " + token)
                     .when()
                         .get("http://barrigarest.wcaquino.me/contas")
                     .then()
@@ -123,7 +123,7 @@ public class AuthTest {
     public void acessaAplicacaoWeb() {
         String cookie = given()
                 .log().all()
-                .formParam("email", "wagner@aquino")
+                .formParam("email", "carol@carol")
                 .formParam("senha", "123456")
                 .contentType(ContentType.URLENC.withCharset("UTF-8"))
                     .when()
