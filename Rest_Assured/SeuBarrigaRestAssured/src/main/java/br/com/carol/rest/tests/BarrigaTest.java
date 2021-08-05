@@ -4,14 +4,9 @@ import br.com.carol.rest.core.BaseTest;
 import br.com.carol.rest.utils.DataUtils;
 import io.restassured.RestAssured;
 import io.restassured.specification.FilterableRequestSpecification;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -23,6 +18,20 @@ public class BarrigaTest extends BaseTest {
     private static String CONTA_NAME = "Conta " + System.nanoTime(); // static para durar ao longo de todos os testes
     private static Integer CONTA_ID;
     private static Integer MOV_ID;
+
+    private Movimentacao getMovimentacaoValida(){
+        Movimentacao mov = new Movimentacao();
+        mov.setConta_id(CONTA_ID);
+//        mov.setUsuario_id(usuario_id);
+        mov.setDescricao("Descricao da movimentacao");
+        mov.setEnvolvido("Envolvido na mov");
+        mov.setTipo("REC");
+        mov.setData_transacao(DataUtils.getDataDiferencaDias(-1)); // ontem
+        mov.setData_pagamento(DataUtils.getDataDiferencaDias(5));
+        mov.setValor(100f);
+        mov.setStatus(true);
+        return mov;
+    }
 
     @Test
     public void t01_deveIncluirContaComSucesso(){
@@ -160,17 +169,4 @@ public class BarrigaTest extends BaseTest {
                     .statusCode(401);
     }
 
-    private Movimentacao getMovimentacaoValida(){
-        Movimentacao mov = new Movimentacao();
-        mov.setConta_id(CONTA_ID);
-//        mov.setUsuario_id(usuario_id);
-        mov.setDescricao("Descricao da movimentacao");
-        mov.setEnvolvido("Envolvido na mov");
-        mov.setTipo("REC");
-        mov.setData_transacao(DataUtils.getDataDiferencaDias(-1)); // ontem
-        mov.setData_pagamento(DataUtils.getDataDiferencaDias(5));
-        mov.setValor(100f);
-        mov.setStatus(true);
-        return mov;
-    }
 }
